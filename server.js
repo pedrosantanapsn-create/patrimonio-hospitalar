@@ -72,6 +72,9 @@ app.use((err, req, res, _next) => {
 
 /* Inicialização: cria o esquema e o primeiro usuário da plataforma, se definido por variáveis de ambiente. */
 async function bootstrap() {
+  const url = process.env.DATABASE_URL || "";
+  if (!url) throw new Error("A variável DATABASE_URL não foi definida.");
+  if ((url.match(/postgres(ql)?:\/\//gi) || []).length !== 1) throw new Error("DATABASE_URL inválida: cole o endereço do banco uma única vez, sem espaços.");
   await migrate();
   const email = process.env.ADMIN_EMAIL, senha = process.env.ADMIN_PASSWORD;
   if (email && senha && !await one(`SELECT 1 FROM users WHERE superadmin`)) {
@@ -88,7 +91,12 @@ if (require.main === module) {
   bootstrap().then(() => {
     const port = Number(process.env.PORT || 3000);
     app.listen(port, () => console.log(`Patrimônio Hospitalar em http://localhost:${port}`));
-  }).catch(e => { console.error("Falha ao iniciar:", e); process.exit(1); });
+  }).catch(e => {
+    // Nunca registra a conexão completa (contém senha)
+    const msg = String(e.message || e).replace(/postgres(ql)?:\/\/[^\s"']+/gi, "[conexão oculta]").replace(/database "[^"]*"/, "database \"[oculto]\"");
+    console.error("Falha ao iniciar:", e.code || "", msg);
+    process.exit(1);
+  });
 }
 
 module.exports = { app, bootstrap };
