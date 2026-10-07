@@ -1,0 +1,78 @@
+/* Documentos oficiais — formatação baseada na ABNT NBR 14724 (apresentação),
+   NBR 6024 (numeração progressiva de seções) e nas normas de apresentação tabular do IBGE. */
+@page { size: A4; margin: 3cm 2cm 2cm 3cm; @top-right { content: counter(page); font: 10pt Arial, Helvetica, sans-serif; } }
+@page :first { @top-right { content: none; } }
+@page paisagem { size: A4 landscape; margin: 3cm 2cm 2cm 3cm; @top-right { content: counter(page); font: 10pt Arial, Helvetica, sans-serif; } }
+body.paisagem .folha { page: paisagem; }
+@page etq { size: A4; margin: 0; }
+body.etiquetas .sheet { page: etq; }
+
+* { box-sizing: border-box; }
+html { background: #e9ecee; }
+body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 12pt; line-height: 1.5; color: #000; }
+.toolbar { position: sticky; top: 0; z-index: 5; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; padding: 10px 16px; background: #15232a; color: #fff; font-size: 14px; }
+.toolbar button { margin-left: auto; font: inherit; font-weight: 600; background: #55b4c9; color: #05252d; border: 0; padding: 8px 14px; border-radius: 6px; cursor: pointer; }
+.tb-link { color: #cfe3e8; text-decoration: none; }
+.folha { background: #fff; width: min(21cm, 100%); margin: 24px auto; padding: 3cm 2cm 2cm 3cm; box-shadow: 0 2px 12px rgba(0,0,0,.12); }
+body.paisagem .folha { width: min(29.7cm, 100%); }
+@media (max-width: 700px) { .folha { padding: 24px 16px; margin: 0; } }
+
+.cab { text-align: center; text-transform: uppercase; font-weight: bold; line-height: 1.3; margin-bottom: 1.5em; }
+.cab strong { font-weight: bold; }
+h1 { font-size: 12pt; text-transform: uppercase; text-align: center; font-weight: bold; margin: 0 0 1.5em; }
+h2 { font-size: 12pt; font-weight: bold; text-transform: uppercase; margin: 1.5em 0 .75em; }
+p { text-align: justify; text-indent: 1.25cm; margin: 0 0 .75em; }
+p.local { text-align: right; text-indent: 0; margin-top: 1.5em; }
+p.aviso { text-indent: 0; background: #fff4d6; padding: 6px 10px; border-left: 3px solid #b07700; }
+.tab-titulo { text-indent: 0; text-align: left; font-size: 10pt; line-height: 1.2; margin: 1em 0 .25em; }
+.fonte { text-indent: 0; font-size: 10pt; line-height: 1.2; margin: .25em 0 1em; }
+table { width: 100%; border-collapse: collapse; font-size: 10pt; line-height: 1.2; page-break-inside: auto; }
+thead { display: table-header-group; }
+tr { page-break-inside: avoid; }
+th, td { padding: 4pt 5pt; vertical-align: top; text-align: left; border-bottom: 1px solid #000; }
+thead th { border-top: 1.5px solid #000; border-bottom: 1px solid #000; font-weight: bold; }
+tbody tr:last-child td { border-bottom: 1.5px solid #000; }
+tbody td { border-bottom: 0; }
+tr.tot td { border-top: 1px solid #000; font-weight: bold; }
+td.r, th.r { text-align: right; }
+.nw { white-space: nowrap; }
+table.kv { margin: 0 0 1em; }
+table.kv th { width: 34%; font-weight: bold; border: 0; border-bottom: 1px solid #ccc; }
+table.kv td { border: 0; border-bottom: 1px solid #ccc; }
+table.kv tbody tr:last-child td, table.kv tbody tr:last-child th { border-bottom: 1px solid #ccc; }
+
+.assinaturas { display: flex; flex-wrap: wrap; gap: 32pt 24pt; margin-top: 48pt; page-break-inside: avoid; }
+.ass { flex: 1 1 200px; text-align: center; font-size: 11pt; line-height: 1.3; }
+.ass .linha { display: block; border-top: 1px solid #000; margin-bottom: 4pt; }
+.ficha-top { display: flex; gap: 12pt; align-items: flex-start; margin-bottom: 1em; }
+.ficha-top img { width: 5.5cm; height: 5.5cm; object-fit: cover; border: 1px solid #999; }
+.ficha-top .qr { width: 3cm; margin-left: auto; }
+.ficha-top .qr svg { width: 100%; height: auto; }
+
+/* Etiquetas */
+body.etiquetas { background: #e9ecee; }
+.sheet { background: #fff; width: 21cm; margin: 16px auto; padding: 1.2cm 0.7cm; display: grid; grid-template-columns: repeat(3, 6.35cm); grid-auto-rows: 3.38cm; column-gap: 0.25cm; row-gap: 0; justify-content: center; }
+body.grande .sheet { grid-template-columns: repeat(2, 9.9cm); grid-auto-rows: 3.81cm; }
+.etq { display: flex; gap: 0.25cm; align-items: center; padding: 0.2cm 0.25cm; overflow: hidden; border: 1px dashed #bbb; break-inside: avoid; }
+.etq .qr { flex: none; width: 2.5cm; height: 2.5cm; }
+body.grande .etq .qr { width: 3cm; height: 3cm; }
+.etq .qr svg { width: 100%; height: 100%; }
+.etq .tx { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
+.etq .org { font-size: 6.5pt; text-transform: uppercase; font-weight: bold; }
+.etq .pat { font-family: "Courier New", monospace; font-size: 12pt; font-weight: bold; letter-spacing: .03em; margin: 2pt 0; }
+body.grande .etq .pat { font-size: 15pt; }
+.etq .ds { font-size: 7pt; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.etq .aviso { font-size: 5.5pt; text-transform: uppercase; margin-top: 2pt; }
+
+@media print {
+  html, body, body.etiquetas { background: #fff; }
+  .no-print, .toolbar { display: none !important; }
+  .folha { box-shadow: none; margin: 0; padding: 0; width: auto; }
+  .sheet { margin: 0; }
+  .etq { border-color: transparent; }
+  @page { margin: 3cm 2cm 2cm 3cm; }
+  body.etiquetas { }
+}
+@media print { body.etiquetas { margin: 0; } }
+@page etq { margin: 0; }
+body.etiquetas .sheet { page: etq; }

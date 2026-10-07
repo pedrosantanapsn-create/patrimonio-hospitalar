@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Patrimônio Hospitalar</title>
+<meta name="description" content="Controle de patrimônio público hospitalar: cadastro, inventário, movimentações e engenharia clínica.">
+<meta name="theme-color" content="#0d5c6e">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<div id="app"><p class="loading">Carregando…</p></div>
+<div id="modal-root"></div>
+<div id="toast" class="toast" hidden role="status" aria-live="polite"></div>
+<input type="file" id="filepick" accept="image/*" capture="environment" hidden>
+<noscript><p class="wrap">Ative o JavaScript para usar o sistema.</p></noscript>
+<script src="/js/regras.js"></script>
+<script src="/js/core.js"></script>
+<script src="/js/scanner.js"></script>
+<script src="/js/v-bens.js"></script>
+<script src="/js/v-operacoes.js"></script>
+<script src="/js/v-gestao.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>

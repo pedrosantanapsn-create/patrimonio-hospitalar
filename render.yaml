@@ -1,0 +1,35 @@
+# Blueprint do Render: cria o serviço web e o banco PostgreSQL.
+# Os planos (gratuito ou pago) são escolhidos no painel do Render ao aplicar o blueprint.
+services:
+  - type: web
+    name: patrimonio-hospitalar
+    runtime: node
+    region: virginia
+    buildCommand: npm ci --omit=dev
+    startCommand: node server.js
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: patrimonio-db
+          property: connectionString
+      - key: APP_NAME
+        value: Patrimônio Hospitalar
+      - key: APP_OWNER
+        value: Consultoria Hospitalar — Luciana Batistioli
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: PUBLIC_URL
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+
+databases:
+  - name: patrimonio-db
+    databaseName: patrimonio
+    user: patrimonio
+    region: virginia
